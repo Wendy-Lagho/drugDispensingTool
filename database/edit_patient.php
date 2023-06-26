@@ -76,6 +76,7 @@
     </script>
 </head>
 <body>
+    <h1>Yoh we are trying sth out</h1>
 <?php
 // Check if the patient ID is provided in the URL
 if (isset($_GET['id'])) {
