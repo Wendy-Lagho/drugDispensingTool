@@ -88,6 +88,7 @@
         <select name="entity" id="entity">
           <option value="patient" id="patient">Patient</option>
           <option value="doctor" id="doctor">Doctor</option>
+          <option value="supervisor" id="supervisor">Supervisor</option>
         </select>
         <button type="submit">Signup</button>
     </form>
