@@ -3,7 +3,7 @@
 <head>
     <title>Patient Details</title>
     <style>
-        /* CSS styles for the table and profile picture */
+        /* CSS styles for the table */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -19,11 +19,59 @@
             font-weight: bold;
         }
 
-        .profile-picture {
-            max-width: 150px;
-            max-height: 150px;
-            border-radius: 50%; /* Rounded border */
-            box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.2); /*Box shadow */
+        .pagination {
+            margin-top: 10px;
+        }
+
+        .pagination a {
+            color: #4CAF50;
+            background-color: transparent;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .pagination a.active-page {
+            color: #fff;
+            background-color: #4CAF50;
+        }
+
+        .pagination a:hover {
+            background-color: #45a049;
+            color: #f1f1f1;
+        }
+
+        .edit-button, .delete-button {
+            background-color: #45a049; /* Changed to green */
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+
+        .add-button {
+            background-color: #45a049;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -58,16 +106,8 @@ if (isset($_GET['id'])) {
         $email = $row["email"];
         $phoneNumber = $row["phone_number"];
         $registrationDate = $row["reg_date"];
-        $profilePicture = $row["profile_picture"];
         ?>
         <h1>Patient Details</h1>
-        <?php
-        if (!empty($profilePicture)) {
-            ?>
-            <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-picture">
-            <?php
-        }
-        ?>
         <table>
             <tr>
                 <th>First Name:</th>
