@@ -74,6 +74,7 @@
         <select name="Lentity" id="entity">
           <option value="patient" id="patient">Patient</option>
           <option value="doctor" id="doctor">Doctor</option>
+            <option value="supervisor" id="supervisor">Supervisor</option>
         </select>
         <button type="submit">Login</button>
     </form>
