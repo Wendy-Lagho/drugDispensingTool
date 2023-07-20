@@ -135,7 +135,7 @@ $result = $conn->query($sql);
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Registration Date</th>
+            <th>Registration Date/Time</th>
             <th>Actions</th>
         </tr>
         <?php

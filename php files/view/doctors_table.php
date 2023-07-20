@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registered Patients</title>
+    <title>Registered Doctors</title>
     <style>
         /* CSS styles for the table */
         table {
