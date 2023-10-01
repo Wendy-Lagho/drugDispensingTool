@@ -20,6 +20,7 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $drug = $result->fetch_assoc();
         $drugid = $drug['drugid'];
+        $drugcategory = $drug['drugcategory'];
         $drugname = $drug['drugname'];
         $drugdesc = $drug['drugdesc'];
         $drugmanufact = $drug['drugmanufact'];

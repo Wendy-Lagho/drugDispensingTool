@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabib Health - Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="css/admin_dashboard.css">
+    <title>View Drug Details</title>
+    <!-- Include any additional CSS or stylesheet links if needed -->
     <style>
+        /* Add CSS styles for the view_details.php page */
         body {
-            position: relative; /* Add position relative to the body */
-
+            position: relative;
+            /* Add any other body styles if needed */
         }
         &::before {
              content: '';
@@ -19,7 +20,7 @@
              z-index: -1; /* Place the overlay behind other content */
          }
 
-
+        /* Copy the styles for .navbar from your existing CSS */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -34,24 +35,21 @@
             width: 100%;
             z-index: 100;
         }
-
         .navbar .logo {
             max-height: 90px;
             width: 100%;
             max-width: 100px;
             background-color: transparent;
         }
-
         .navbar ul {
             list-style: none;
             display: flex;
         }
 
         .navbar ul li {
-            position: relative; /* Position the parent list items */
+            position: relative;
             margin: 0;
         }
-
         .navbar .dropdown-menu {
             display: none; /* Hide the dropdown menu by default */
             position: absolute;
@@ -72,9 +70,8 @@
             font-family: "American Typewriter";
             text-decoration: none;
         }
-
-        /* Show the dropdown menu on hover */
-        .navbar ul li:hover .dropdown-menu {
+            /* Show the dropdown menu on hover */
+            .navbar ul li:hover .dropdown-menu {
             display: block;
         }
 
@@ -118,33 +115,6 @@
             font-size: 12px;
             color: #666;
         }
-
-        .login-btn{
-            display: inline-block;
-            background-color: #005000;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            font-family: "Telugu MN";
-            margin-right: 10px; /* Add some spacing between the buttons */
-            cursor: pointer;
-        }
-
-        .signup-btn {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #005000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            font-family: "Telugu MN";
-            margin-right: 40px;
-            cursor: pointer;
-        }
-
         .navbar .logout-btn {
             background-color: #005000;
             color: white;
@@ -216,108 +186,111 @@
         tr:hover {
             background-color: #e5f0ff;
         }
-    /* Add a CSS style for the drug categories */
-    .drug-categories {
+        .drug-details-container {
             display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+            align-items: center;
         }
-
-        .drug-category {
-            text-align: center;
+        .drug-details-container img {
+            max-width: 400px; /* Adjust the max-width as needed */
+            align-self: flex-start; /* Align the image to the top/left within the container */
+            margin-right: 20px;
+        }
+        .drug-details {
             padding: 10px;
-            width: 19%; /* Distribute categories evenly */
-        }
-
-        .drug-category img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px; /* Space between image and "View Details" link */
-        }
-
-        .drug-category a {
-            display: block; /* Make the link a block element to be below the image */
-            color: #005000;
-            font-family: "American Typewriter";
-        }
-        /* Add a CSS style for the drug images */
-        .drug-image {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
+            /*align the details to the top/left within the container */
+            align-content: flex-start;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-<!-- Navbar -->
-<div class="navbar">
-    <img class="logo" src="images/_Pngtree_medical_health_logo_4135858-removebg-preview.png" alt="Logo">
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-    <ul>
-        <li><a href="logout.php" class="logout-btn">Logout</a></li>
-    </ul>
-</div>
-
-<!-- Admin Dashboard Content -->
-<div class="dashboard-container">
-<h1>Welcome, Admin</h1>
-    <h2>List of Tabib Health Users.</h2>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>User Type</th>
-        </tr>
-        <?php
-        require_once 'connection.php';
-        // Check if the database connection is successful
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        // Fetch all users from the 'users' table
-        $sql = "SELECT username, user_type FROM users";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["username"] . "</td>";
-                echo "<td>" . $row["user_type"] . "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='3'>No users found.</td></tr>";
-        }
-        ?>
-    </table>
-    <!-- Drug categories and images-->
-    <h2>Drug Categories</h2>
-    <div class="drug-categories">
-        <?php
-        require_once 'connection.php';
-        // Fetch drug categories and their image filenames from the 'drugs' table
-        $sql = "SELECT drugcategory, drug_image_filename FROM drugs";
-        $result = $conn->query($sql);
-
-        if ($result !== false && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='drug-category'>";
-                echo "<h3>" . $row["drugcategory"] . "</h3>";
-                echo "<img src='uploads/" . $row["drug_image_filename"] . "' alt='" . $row["drugcategory"] . "'>";
-                echo "<a href='view_details.php?drugcategory=" . urlencode($row["drugcategory"]) . "'>View Details</a>";
-                echo "</div>";
-            }
-        } else {
-            echo "<p>No drug categories found.</p>";
-        }
-        // Close the database connection
-        $conn->close();
-        ?>
+    <!-- Navbar -->
+    <div class="navbar">
+        <img class="logo" src="images/_Pngtree_medical_health_logo_4135858-removebg-preview.png" alt="Logo">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <ul>
+            <li><a href="logout.php" class="logout-btn">Logout</a></li>
+        </ul>
     </div>
-</div>
+    <h1>Drug Details</h1>
+
+<?php
+// Check if the 'drugcategory' parameter is set in the URL
+if (isset($_GET['drugcategory'])) {
+    $drugcategory = $_GET['drugcategory'];
+
+    // Make a database connection (reuse your connection code)
+    require_once 'connection.php';
+
+    // Fetch the image filename based on the 'drugcategory'
+    $sql = "SELECT drug_image_filename FROM drugs WHERE drugcategory = ?";
+    $stmt1 = $conn->prepare($sql);
+
+    if (!$stmt1) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt1->bind_param("s", $drugcategory);
+    if (!$stmt1->execute()) {
+        die("Execute failed: " . $stmt1->error);
+    }
+
+    $stmt1->bind_result($imageFilename);
+
+    // Check if a row was found
+    if ($stmt1->fetch()) {
+        echo "<div class='drug-details-container'>";
+        echo "<img src='uploads/" . htmlspecialchars($imageFilename) . "' alt='" . htmlspecialchars($drugcategory) . "'>";
+        echo "</div>";
+    } else {
+        echo "<p>Drug category not found.</p>";
+    }
+
+    // Close the first result set and statement
+    $stmt1->close();
+
+    // Fetch drug details based on the 'drugcategory'
+    $sql = "SELECT drugid, drugcategory, drugname, drugdesc, drugmanufact, reg_date FROM drugs WHERE drugcategory = ?";
+    $stmt2 = $conn->prepare($sql);
+
+    if (!$stmt2) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt2->bind_param("s", $drugcategory);
+    if (!$stmt2->execute()) {
+        die("Execute failed: " . $stmt2->error);
+    }
+
+    $stmt2->bind_result($drugid, $drugcategory, $drugName, $drugDesc, $drugmanufact, $reg_date);
+
+    // Check if a row was found
+    if ($stmt2->fetch()) {
+        echo "<div class='drug-details'>";
+        echo "<h2>Drug Category: " . htmlspecialchars($drugcategory) . "</h2>";
+        echo "<p><strong>Drug Name:</strong> " . htmlspecialchars($drugName) . "</p>";
+        echo "<p><strong>Drug Description:</strong> " . htmlspecialchars($drugDesc) . "</p>";
+        echo "<p><strong>Drug Manufacturer:</strong> " . htmlspecialchars($drugmanufact) . "</p>";
+        echo "<p><strong>Registration Date:</strong> " . htmlspecialchars($reg_date) . "</p>";
+        echo "</div>";
+    } else {
+        echo "<p>Drug details not found.</p>";
+    }
+
+    // Close the second result set and statement
+    $stmt2->close();
+
+    // Close the database connection
+    $conn->close();
+} else {
+    echo "<p>Invalid request. Please provide a 'drugcategory' parameter.</p>";
+}
+?>
 </body>
 </html>
+

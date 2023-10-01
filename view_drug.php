@@ -77,7 +77,7 @@ session_start();
     // Calculate the starting patient index for the current page
     $startIndex = ($currentPage - 1) * $patientsPerPage;
 
-    // Fetch patient records for the current page
+    // Fetch the data for the current page
     $sql = "SELECT * FROM Drugs LIMIT ?, ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $startIndex, $patientsPerPage);
@@ -87,7 +87,7 @@ session_start();
 
     <h1>Drugs Stock List</h1>
 
-    <!-- Add patient button -->
+    <!-- Add a new drug button -->
     <a class="add-button" href="drug_form.php">Add New Drug</a>
 
     <?php
@@ -99,17 +99,18 @@ session_start();
     // Display table of Drugs
     if ($result->num_rows > 0) {
         echo "<table>";
-        echo "<tr><th>Drug ID</th><th>Drug Name</th><th>Drug Description</th><th>Drug Manufacturer</th><th>Date/Time Added</th><th>Actions</th></tr>";
+        echo "<tr><th>Drug ID</th><th>Drug Category</th><th>Drug Name</th><th>Drug Description</th><th>Drug Manufacturer</th><th>Date/Time Added</th><th>Actions</th></tr>";
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row["drugid"] . "</td>";
+            echo "<td>" . $row["drugcategory"] . "</td>";
             echo "<td>" . $row["drugname"] . "</td>";
             echo "<td>" . $row["drugdesc"] . "</td>";
             echo "<td>" . $row["drugmanufact"] . "</td>";
             echo "<td>" . $row["reg_date"] . "</td>";
             echo "<td>";
-            echo "<a class='edit-button' href='edit_drug.php?id=" . $row['id'] . "'>Edit</a>";
-            echo "<a class='delete-button' href='delete_drug.php?id=" . $row['id'] . "'>Delete</a>";
+            echo "<a class='edit-button' href='edit_drug.php?id=" . $row['drugid'] . "'>Edit</a>";
+            echo "<a class='delete-button' href='delete_drug.php?id=" . $row['drugid'] . "'>Delete</a>";
             echo "</td>";
             echo "</tr>";
         }
